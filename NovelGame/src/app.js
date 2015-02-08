@@ -108,7 +108,7 @@ var gameTalkLayer = cc.Layer.extend({
             y: 100,
         });
 
-	this.talk.setOpacity(192);
+	this.talk.setOpacity(230);
         this.addChild(this.talk, 1);
 
 	// 文字ラベル
