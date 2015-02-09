@@ -21,8 +21,8 @@ var OpeningLayer = cc.Layer.extend({
         closeItem.attr({
             x: size.width - 20,
             y: 20,
-            anchorX: 0.5,
-            anchorY: 0.5
+//            anchorX: 0.5,
+//            anchorY: 0.5
         });
 
         var menu = new cc.Menu(closeItem);
@@ -100,6 +100,8 @@ var gameTalkLayer = cc.Layer.extend({
         this._super();
 
         var size = cc.winSize;
+        this.anchorX = 0;
+        this.anchorY = 0;
 
 	// 文字表示背景
         this.talk = new cc.Sprite(res.TalkWindow);
@@ -108,13 +110,16 @@ var gameTalkLayer = cc.Layer.extend({
             y: 100,
         });
 
-	this.talk.setOpacity(230);
+	this.talk.setOpacity(230);  // 透明度
         this.addChild(this.talk, 1);
 
 	// 文字ラベル
-        var txtLabel = new cc.LabelTTF("test\ntext\nてすと", "res/fonts/font_1_kokugl_1.15_rls.ttf", 20);
+        var txtLabel = new cc.LabelTTF("1test\n2text\n3てすと\n4\n5\n6\n"
+		 ,"res/fonts/font_1_kokugl_1.15_rls.ttf", 20
+		 ,cc.size(480,200),cc.TEXT_ALIGNMENT_RIGHT);
+
         txtLabel.x = 0;
-        txtLabel.y = 100;
+        txtLabel.y = 0;
         txtLabel.anchorX = 0;
         txtLabel.anchorY = 0;
 
