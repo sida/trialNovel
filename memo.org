@@ -1,0 +1,41 @@
+* 制作メモ
+
+** メモ
+
+- 画面サイズ 480x800
+- セレクトメニュー 480x100(うち高さ16は透明)
+
+
+** 画面
+- Loading 
+
+- Opening SCENE
+  - OpeningMain LAYER
+    背景。固定。
+
+- GameMain SCENE
+  - SelectMenu LAYER
+    選択メニュー
+    再読、会話ウインドウとは排他的に表示
+  - History LAYER
+    再読
+    会話ウインドウとは排他的に表示
+  - Talk LAYER
+    会話ウインドウ
+  - Charctor LAYER
+    立ち絵
+  - BackGround LAYER
+    背景
+    差し替え可能
+
+- Setting SCENE
+  - SettinMain LAYER
+    いろいろ機能選択
+- 
+
+*** 共通UI
+  - SelectMenu LAYER
+    選択メニュー
+
+
+**
