@@ -4,7 +4,8 @@ var res = {
     OpenTitle : "res/title.png",
     TalkWindow : "res/talk.png",
     BackGround : "res/background.png",
-//    GameFont   : "res/fonts/font_1_kokugl_1.15_rls.ttf"
+    CommonSelectButton : "res/selectmenu.png",
+    CommonSelectButtonOff : "res/selectmenu_off.png",
 };
 
 var g_resources = [];

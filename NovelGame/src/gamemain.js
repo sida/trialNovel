@@ -7,23 +7,37 @@ var gameMainLayer = cc.Layer.extend({
         this._super();
 
         var size = cc.winSize;
+        this.anchorX = 0;
+        this.anchorY = 0;
 
-	// 起動画面
-        var backImage = new cc.MenuItemImage(
-            res.BackGround,  // enableのとき
-            null,            // disableのとき
-            function () {
-                cc.log("clickd title!!!!");
-            }, this);
-        backImage.attr({
-            x: size.width / 2,
-            y: size.height / 2,
+	// // 起動画面
+        // var backImage = new cc.MenuItemImage(
+        //     res.BackGround,  // enableのとき
+        //     null,            // disableのとき
+        //     function () {
+        //         cc.log("clickd title!!!!");
+        //     }, this);
+        // backImage.attr({
+        //     x: size.width / 2,
+        //     y: size.height / 2,
+        // });
+
+        // var back = new cc.Menu(backImage);
+        // back.x = 0;
+        // back.y = 0;
+        // this.addChild(back, 0);
+
+
+	// 背景画像
+        this.back = new cc.Sprite(res.BackGround);
+        this.back.attr({
+            x: 0,
+            y: 0,
+            anchorX: 0,
+            anchorY: 0,
         });
 
-        var back = new cc.Menu(backImage);
-        back.x = 0;
-        back.y = 0;
-        this.addChild(back, 0);
+        this.addChild(this.back, 1);
 
         return true;
     }
@@ -72,7 +86,15 @@ var gameMainScene = cc.Scene.extend({
 	var layer = new gameMainLayer();
 	this.addChild(layer);
 	var talkLayer = new gameTalkLayer();
-        this.addChild(talkLayer);
+	this.addChild(talkLayer);
+	var selector = getInstanceSelectMenuLayer();
+	selector.setCallBackFunction(function (num) {
+            cc.log("callback:"+num);
+	    selector.setAllVisible(false);
+	});
+        this.addChild(selector);
+	selector.setAllVisible(false);
+	selector.setVisible(3,true);
     }
 });
 
