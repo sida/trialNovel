@@ -34,11 +34,40 @@ var _selectMenuLayer = cc.Layer.extend({
 	}
         menu.attr({
             x: 0,
-            y: 200,
+            y: LOC_SELECT_MENU_BANNER_BOTTOM.y,
             anchorX: 0,
             anchorY: 0,
         });
         this.addChild(menu, 1);
+
+/*
+	var menuStr = new MenuStr();
+	for (var ii=0;ii<5;ii++){
+	    this.buttonList[ii] = this.createSelectButtonStr(ii,5);
+	    menu.addChild(this.buttonListStr[ii]);
+	}
+        menuStr.attr({
+            x: 0,
+            y: LOC_SELECT_MENU_BANNER_BOTTOM.y,
+            anchorX: 0,
+            anchorY: 0,
+        });
+        this.addChild(menuStr, 1);
+*/
+
+	// // 文字ラベル
+        // var txtLabel = new cc.LabelTTF("1test\n2text\n3てすと\n4\n5\n6\n"
+	// 	 ,"res/fonts/font_1_kokugl_1.15_rls.ttf", 20
+	// 	 ,cc.size(480,200),cc.TEXT_ALIGNMENT_RIGHT);
+
+        // txtLabel.x = 0;
+        // txtLabel.y = 0;
+        // txtLabel.anchorX = 0;
+        // txtLabel.anchorY = 0;
+
+        // this.addChild(txtLabel, 5);
+
+
 
         return true;
     },

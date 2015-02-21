@@ -83,10 +83,13 @@ var gameTalkLayer = cc.Layer.extend({
 var gameMainScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
+	// バック画像
 	var layer = new gameMainLayer();
 	this.addChild(layer);
+	// 会話レイヤ
 	var talkLayer = new gameTalkLayer();
 	this.addChild(talkLayer);
+	// 選択メニューレイヤ
 	var selector = getInstanceSelectMenuLayer();
 	selector.setCallBackFunction(function (num) {
             cc.log("callback:"+num);
