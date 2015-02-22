@@ -4,6 +4,7 @@ var res = {
     OpenTitle : "res/title.png",
     TalkWindow : "res/talk.png",
     BackGround : "res/background.png",
+    BGSchool : "res/school.png",
     CommonSelectButton : "res/selectmenu.png",
     CommonSelectButtonOff : "res/selectmenu_off.png",
 };

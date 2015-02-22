@@ -6,10 +6,7 @@
 var selectMenuLayer = null;
 
 function getInstanceSelectMenuLayer(){
-    cc.log("getInstanceSelectMenuLayer");
-
     if (!selectMenuLayer){
-	cc.log("new SelectMenuLayer");
 	selectMenuLayer= new _selectMenuLayer();
     }
     return selectMenuLayer;
@@ -18,6 +15,7 @@ function getInstanceSelectMenuLayer(){
 var _selectMenuLayer = cc.Layer.extend({
     callback : null,
     buttonList:[],
+    maxmenu:5,
     ctor:function () {
         //////////////////////////////
         // 1. super init first
@@ -28,67 +26,44 @@ var _selectMenuLayer = cc.Layer.extend({
 	// ボタン作成
 	// ５個固定でいいや
 	var menu = new cc.Menu();
-	for (var ii=0;ii<5;ii++){
-	    this.buttonList[ii] = this.createSelectButton(ii,5);
-	    menu.addChild(this.buttonList[ii]);
+	for (var ii=0;ii<this.maxmenu;ii++){
+	    // ボタンとテキストラベルを生成する
+	    this.buttonList[ii] = this.createSelectButton(ii,this.maxmenu);
+	    var bt = this.buttonList[ii].image;  // MenuItemImage
+	    var tl = this.buttonList[ii].text;   // テキストラベル
+            this.addChild(tl,5);// 5は表示順
+	    menu.addChild(bt);
 	}
         menu.attr({
             x: 0,
-            y: LOC_SELECT_MENU_BANNER_BOTTOM.y,
+            y: gm.LOC_SELECT_MENU_BANNER_BOTTOM.y,
             anchorX: 0,
             anchorY: 0,
         });
-        this.addChild(menu, 1);
-
-/*
-	var menuStr = new MenuStr();
-	for (var ii=0;ii<5;ii++){
-	    this.buttonList[ii] = this.createSelectButtonStr(ii,5);
-	    menu.addChild(this.buttonListStr[ii]);
-	}
-        menuStr.attr({
-            x: 0,
-            y: LOC_SELECT_MENU_BANNER_BOTTOM.y,
-            anchorX: 0,
-            anchorY: 0,
-        });
-        this.addChild(menuStr, 1);
-*/
-
-	// // 文字ラベル
-        // var txtLabel = new cc.LabelTTF("1test\n2text\n3てすと\n4\n5\n6\n"
-	// 	 ,"res/fonts/font_1_kokugl_1.15_rls.ttf", 20
-	// 	 ,cc.size(480,200),cc.TEXT_ALIGNMENT_RIGHT);
-
-        // txtLabel.x = 0;
-        // txtLabel.y = 0;
-        // txtLabel.anchorX = 0;
-        // txtLabel.anchorY = 0;
-
-        // this.addChild(txtLabel, 5);
-
-
+        this.addChild(menu,1);// 1は表示順
 
         return true;
     },
-    setMenu:function (){
-	// 非表示に
-	this.setAllVisible(false);
-    },
     setVisible : function (num,f) {
 	var bt = this.buttonList[num];
-	bt.setVisible(f);
+	bt.image.setVisible(f);
+	bt.text.setVisible(f);
+    },
+    setText : function (num,text) {
+	var bt = this.buttonList[num];
+	bt.text.setString(text);
     },
     setAllVisible : function (f) {
 	for (var ii=0;ii<this.buttonList.length;ii++){
-	    var bt = this.buttonList[ii];
-	    bt.setVisible(f);
+	    this.buttonList[ii].image.setVisible(f);
+	    this.buttonList[ii].text.setVisible(f);
 	}
     },
     setCallBackFunction : function (f){
     	this.callback = f;
     },
     createSelectButton:function(num,max){
+	// Button Image
         var button = new cc.MenuItemImage(
             res.CommonSelectButton,
             res.CommonSelectButtonOff,
@@ -100,13 +75,28 @@ var _selectMenuLayer = cc.Layer.extend({
             }, this);
         button.attr({
             x: 0,
-            y: SZ_SELECT_MENU_BANNER.y * (max-num-1),
+            y: gm.SZ_SELECT_MENU_BANNER.y * (max-num-1),
             anchorX: 0,
             anchorY: 0,
         });
-	return button;
+
+	// 文字ラベル
+        var txtLabel = new cc.LabelTTF(
+	    "1.テストする",
+	    "res/fonts/font_1_kokugl_1.15_rls.ttf",
+	    gm.FONTSZ_SELECT_MENU,
+	    cc.size(
+		gm.SZ_SELECT_MENU_BANNER.x - gm.SZ_SELECT_MENU_BANNER_MARGIN.x * 2,
+		gm.SZ_SELECT_MENU_BANNER.y - gm.SZ_SELECT_MENU_BANNER_MARGIN.y * 2),
+	    cc.TEXT_ALIGNMENT_LEFT);
+
+        txtLabel.x = gm.SZ_SELECT_MENU_BANNER_MARGIN.x;
+        txtLabel.y = gm.LOC_SELECT_MENU_BANNER_BOTTOM.y
+	    + gm.SZ_SELECT_MENU_BANNER.y * (max-num-1)
+	    + gm.SZ_SELECT_MENU_BANNER_MARGIN.y;
+        txtLabel.anchorX = 0;
+        txtLabel.anchorY = 0;
+
+	return {image:button,text:txtLabel};
     },
-    getResult:function (){
-	return selectedMenuNo;
-    }
 });
